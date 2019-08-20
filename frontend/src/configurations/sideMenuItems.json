@@ -5,7 +5,28 @@
       "type": "button",
       "icon": "home",
       "controller": "home",
-      "customTitle": "Welcome to Boiler Plate"
+      "customTitle": "Welcome Admin"
+    },
+    {
+      "name": "MONEY",
+      "type": "button",
+      "icon": "attach_money",
+      "controller": "money",
+      "customTitle": "Welcome Admin"
+    },
+    {
+      "name": "USERS",
+      "type": "button",
+      "icon": "people",
+      "controller": "users",
+      "customTitle": "Welcome Admin"
+    },
+    {
+      "name": "TRANSACTIONS",
+      "type": "button",
+      "icon": "compare_arrows",
+      "controller": "transactions",
+      "customTitle": "Welcome Admin"
     }
   ]
 }

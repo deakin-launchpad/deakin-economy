@@ -31,3 +31,71 @@
     transform: rotate(360deg);
   }
 }
+
+.counter {
+  display: table-cell;
+  font-size:30px;
+  font-weight:bold;
+  color:white;
+  width:150px;
+  background-color:grey;
+  text-align: center;
+}
+
+ /*--Dashboard---*/
+  
+  
+ .cardimg{
+  width:100px;
+  height:100px;
+  margin:0px auto;
+}
+
+.dash-btn{
+  margin: 0 auto;
+}
+.dash-btn a{
+  margin:10px;
+}
+
+.db{
+  background-color:red;
+}
+
+.myvideo{
+  max-width:auto;
+  height:300px;
+
+ 
+  overflow: hidden;
+}
+.videomodal{
+  width:1000px;
+  height:500px;
+
+}
+
+/**--namelist cards--**/
+
+.card{
+  padding:20px;
+}
+.card-content{
+  text-transform: capitalize;
+}
+.notification{
+  border:1px solid black;
+  padding:10px;
+  color:white;
+  background-color: green;
+  margin:30px;
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+
+
