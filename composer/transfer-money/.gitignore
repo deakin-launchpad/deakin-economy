@@ -1,7 +1,0 @@
-composer-logs/
-
-*.card
-*.bna
-
-/node_modules
-package-lock.json
