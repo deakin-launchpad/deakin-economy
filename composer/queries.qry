@@ -1,5 +1,0 @@
-query selectOwner{
-  description: "current owner of vault"
-  statement:
-          SELECT org.example.mynetwork.Vault
-}

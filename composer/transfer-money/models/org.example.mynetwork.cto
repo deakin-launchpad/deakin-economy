@@ -1,0 +1,49 @@
+/**
+ * My commodity trading network
+ */
+namespace org.example.mynetwork
+
+
+participant User identified by id {
+  o String id
+  o String name
+}
+
+asset Vault identified by id {
+  o String id
+  o Double amount
+  --> User owner
+  o CoinTransaction[] transactions optional
+}
+
+concept CoinTransaction {
+  o Double amount
+  o CoinTransactionType type
+}
+
+enum CoinTransactionType {
+  o DEPOSIT
+  o WITHDRAW
+  o SEND
+  o RECEIVE
+}
+
+transaction DepositCoin {
+  --> Vault vault
+  o Double amount
+}
+
+transaction WithdrawCoin {
+  --> Vault vault
+  o Double amount
+}
+
+transaction TransferCoin {
+  --> Vault sender
+  --> Vault receiver
+  o Double amount
+}
+
+event TransactionCompleted {
+  o String msg
+}

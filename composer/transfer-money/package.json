@@ -2,11 +2,11 @@
   "engines": {
     "composer": "^0.20.8"
   },
-  "name": "pass-token",
-  "version": "0.0.12",
+  "name": "transfer-money",
+  "version": "0.0.1",
   "description": "fabric",
   "scripts": {
-    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/pass-token.bna",
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/transfer-money.bna",
     "pretest": "npm run lint",
     "lint": "eslint .",
     "test": "nyc mocha -t 0 test/*.js && cucumber-js"
