@@ -1,0 +1,17 @@
+query totalTransactions {
+  description: "select total transaction"
+  statement:
+    SELECT org.hyperledger.composer.system.HistorianRecord WHERE (transactionType == 'TransferCoin')
+}
+
+query selectUsers {
+  description: "Select all users"
+  statement:
+      SELECT org.example.mynetwork.User
+}
+
+query transferCoinCount {
+  description: "Select all transactions of transfercoin"
+  statement:
+      SELECT org.example.mynetwork.TransferCoin
+}
