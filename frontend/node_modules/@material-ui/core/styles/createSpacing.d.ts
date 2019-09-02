@@ -1,8 +1,9 @@
 /* tslint:disable:unified-signatures */
 
-export type SpacingArgument = number | string;
+export type SpacingArgument = number;
 
 export interface Spacing {
+  (): number;
   (value1: SpacingArgument): number;
   (value1: SpacingArgument, value2: SpacingArgument): string;
   (value1: SpacingArgument, value2: SpacingArgument, value3: SpacingArgument): string;
@@ -14,6 +15,6 @@ export interface Spacing {
   ): string;
 }
 
-export type SpacingOptions = number | Spacing;
+export type SpacingOptions = number | ((factor: number) => string | number);
 
 export default function createSpacing(spacing: SpacingOptions): Spacing;
