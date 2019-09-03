@@ -5,3 +5,5 @@
 
 /composer/transfer-money/node_modules
 /composer/transfer-money/package-lock.json
+
+/frontend/node_modules/
