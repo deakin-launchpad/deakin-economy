@@ -12,10 +12,7 @@ export const Users = () => {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <h1>List of Users </h1>
       <div className="row">
-          <UserCards />
-          <UserCards />
           <UserCards />
       </div>
 
@@ -30,10 +27,13 @@ export const Users = () => {
         </Modal.Header>
         <Modal.Body>
         <Form>
-  <Form.Group controlId="numberofcoins">
-   
-    <Form.Control type="text" placeholder="Enter username" />
+  <Form.Group controlId="userid">
+    <Form.Control type="text" placeholder="Enter id" />
   </Form.Group>
+  <Form.Group controlId="username">
+    <Form.Control type="text" placeholder="Enter name" />
+  </Form.Group>
+ 
 </Form>
         </Modal.Body>
         <Modal.Footer>
