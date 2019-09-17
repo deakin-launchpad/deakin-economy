@@ -1,5 +1,5 @@
 /**
- * My commodity trading network
+ * Deakin economy 
  */
 namespace org.example.mynetwork
 
@@ -7,9 +7,15 @@ namespace org.example.mynetwork
 participant User identified by id {
   o String id
   o String name
+  o USERTYPE usertype default="NORMALUSER"
 }
 
-asset Vault identified by id {
+enum USERTYPE {
+  o ADMIN
+  o NORMALUSER
+}
+
+asset Wallet identified by id {
   o String id
   o Double amount
   --> User owner
@@ -29,18 +35,18 @@ enum CoinTransactionType {
 }
 
 transaction DepositCoin {
-  --> Vault vault
+  --> Wallet Wallet
   o Double amount
 }
 
 transaction WithdrawCoin {
-  --> Vault vault
+  --> Wallet Wallet
   o Double amount
 }
 
 transaction TransferCoin {
-  --> Vault sender
-  --> Vault receiver
+  --> Wallet sender
+  --> Wallet receiver
   o Double amount
 }
 

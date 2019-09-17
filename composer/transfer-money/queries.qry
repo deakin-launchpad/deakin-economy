@@ -1,7 +1,7 @@
 query totalTransactions {
   description: "select total transaction"
   statement:
-    SELECT org.hyperledger.composer.system.HistorianRecord WHERE (transactionType == 'TransferCoin')
+    SELECT org.hyperledger.composer.system.HistorianRecord
 }
 
 query selectUsers {

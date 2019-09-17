@@ -2,22 +2,22 @@
 function onDepositCoin(transaction) {
   validateAmount(transaction.amount)
 
-  var vault = transaction.vault
-  vault.amount += transaction.amount
+  var wallet = transaction.wallet
+  wallet.amount += transaction.amount
 
   var newTransaction = getFactory().newConcept('org.example.mynetwork', 'CoinTransaction')
   newTransaction.amount = transaction.amount
   newTransaction.type = "DEPOSIT"
 
-  if (vault.transactions) {
-    vault.transactions.push(newTransaction)
+  if (wallet.transactions) {
+    wallet.transactions.push(newTransaction)
   } else {
-    vault.transactions = [newTransaction]
+    wallet.transactions = [newTransaction]
   }
 
-  return getAssetRegistry('org.example.mynetwork.Vault')
+  return getAssetRegistry('org.example.mynetwork.Wallet')
     .then(function (assetRegistry) {
-      return assetRegistry.update(vault)
+      return assetRegistry.update(wallet)
     })
     .then(function () {
       sendEvent("Transfer complete");
@@ -27,27 +27,27 @@ function onDepositCoin(transaction) {
 function onWithdrawCoin(transaction) {
   validateAmount(transaction.amount)
 
-  var vault = transaction.vault
+  var wallet = transaction.wallet
 
-  if (vault.amount < transaction.amount) {
+  if (wallet.amount < transaction.amount) {
     throw new Error('Insufficient fund')
   }
 
-  vault.amount -= transaction.amount
+  wallet.amount -= transaction.amount
 
   var newTransaction = getFactory().newConcept('org.example.mynetwork', 'CoinTransaction')
   newTransaction.amount = transaction.amount
   newTransaction.type = "WITHDRAW"
 
-  if (vault.transactions) {
-    vault.transactions.push(newTransaction)
+  if (wallet.transactions) {
+    wallet.transactions.push(newTransaction)
   } else {
-    vault.transactions = [newTransaction]
+    wallet.transactions = [newTransaction]
   }
 
-  return getAssetRegistry('org.example.mynetwork.Vault')
+  return getAssetRegistry('org.example.mynetwork.Wallet')
     .then(function (assetRegistry) {
-      return assetRegistry.update(vault)
+      return assetRegistry.update(wallet)
     })
     .then(function () {
       sendEvent("Transfer complete");
@@ -84,18 +84,18 @@ function onTransferCoin(transaction) {
 
   // Chain style
   //
-  // return getAssetRegistry('org.example.mynetwork.Vault')
+  // return getAssetRegistry('org.example.mynetwork.Wallet')
   //   .then(function (assetRegistry) {
   //     return assetRegistry.update(transaction.sender)
   //   })
   //   .then(function () {
-  //     return getAssetRegistry('org.example.mynetwork.Vault')
+  //     return getAssetRegistry('org.example.mynetwork.Wallet')
   //   })
   //   .then(function (assetRegistry) {
   //     return assetRegistry.update(transaction.receiver)
   //   })
    
-  return getAssetRegistry('org.example.mynetwork.Vault')
+  return getAssetRegistry('org.example.mynetwork.Wallet')
     .then(function (assetRegistry) {
       return assetRegistry.updateAll([transaction.sender, transaction.receiver])
     })
