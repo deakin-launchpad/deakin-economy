@@ -1,42 +1,39 @@
 import React from 'react'
-import $ from 'jquery'
+import {Consumer} from '../../../contexts/common/context'
 
 export const Home = () => {
-
   
-  $(document).ready(function(){
+  var totalCoins =0;
+  var totalusers = 0;
 
-    $('.counter').each(function() {
-      var $this = $(this),
-          countTo = $this.attr('data-count');
-    
-      $({ countNum: $this.text()}).animate({
-        countNum: countTo
-      },
-    
-      {
-    
-        duration: 3000,
-        easing:'linear',
-        step: function() {
-          $this.text(Math.floor(this.countNum));
-        },
-        complete: function() {
-          $this.text(this.countNum);
-          //alert('finished');
-        }
-      });
-    });
-    });
-    
   return (
-    <div className="home">
-      <h1>Money</h1>
-      <span class="counter center" data-count="1000000">0</span>
-      <h1>Users</h1>
-      <span class="counter" data-count="400">0</span>
-      <h1>Transactions</h1>
-      <span class="counter" data-count="95">0</span>
-    </div>
+    <Consumer>
+        {value => {
+            const {wallet_list} = value;
+            const {user_list} = value;
+            wallet_list.map(wallet => (
+              totalCoins = totalCoins + wallet.amount
+            ))
+            user_list.map(user => {
+              if(user.usertype == 'NORMALUSER'){
+                totalusers = totalusers + 1;
+              }
+            })
+            
+            return (
+              <React.Fragment>
+                 <div className="home">
+                    <h2>Total Coins</h2>
+                    <span class="counter center">{totalCoins}</span>
+                    <h2>Total Users</h2>
+                    <span class="counter">{totalusers}</span>
+                    <h2>Transactions</h2>
+                    <span class="counter">0</span>
+                </div>
+              </React.Fragment>
+            );
+          }
+        }
+      </Consumer>
   )
 }

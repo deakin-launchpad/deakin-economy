@@ -1,50 +1,46 @@
 import React from 'react'
-import UserCards from '../Cards/UserCard'
-import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import 'bootstrap/dist/css/bootstrap.css';
+import UserCard from './UserCard'
+import {Consumer} from '../../../contexts/common/context'
+import { isBreakOrContinueStatement } from '../../../../node_modules/typescript/lib/typescript'
 
 export const Users = () => {
-  const [show, setShow] = React.useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
-    <div>
-      <div className="row">
-          <UserCards />
-      </div>
-
-        <Button variant="primary" onClick={handleShow}>
-        Add User
-      </Button>
-    <Modal show={show} onHide={handleClose}  
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Add User</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Form>
-  <Form.Group controlId="userid">
-    <Form.Control type="text" placeholder="Enter id" />
-  </Form.Group>
-  <Form.Group controlId="username">
-    <Form.Control type="text" placeholder="Enter name" />
-  </Form.Group>
- 
-</Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose} type="submit">
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+    <Consumer>
+        {value => {
+         
+            const {user_list} = value;
+            const{wallet_list} = value;
+            console.log(wallet_list)
+            console.log(user_list)
+            if(user_list === undefined || user_list.length === 0){
+              return null;
+            }
+            if(wallet_list === undefined || wallet_list.length === 0){
+              return null;
+            }
+            else{
+            return (
+              <React.Fragment>
+                {user_list.map((user,k) => {
+                     let amount=0;
+                   if(user.usertype == 'ADMIN'){
+                    return null;
+                    }
+                    wallet_list.map((wallet,key) => {
+                     
+                      const owner=wallet.owner.slice(36);
+                 
+                      if(user.name == owner){
+                        amount = wallet.amount;
+                      }
+                    })  
+                    return (<UserCard key={k} user={user} amount={amount}/>)
+                })}
+             
+              </React.Fragment>
+            );
+          }}
+        }
+      </Consumer>
   )
 }

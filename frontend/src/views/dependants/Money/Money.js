@@ -1,51 +1,29 @@
 
 import React from 'react';
-import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import 'bootstrap/dist/css/bootstrap.css';
-
-
-
-
+import {Consumer} from '../../../contexts/common/context'
 
 export const Money = () => {
-  const [show, setShow] = React.useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    var totalCoins =0;
   
   return (
     <div>
-      <h1>Money Status</h1>
-      <h3>Total money ==> 10,000</h3>
-      <Button variant="primary" onClick={handleShow}>
-        Generate Coins
-      </Button>
-      
-      <Modal show={show} onHide={handleClose}  
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Generate Coins</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="numberofcoins">
-              <Form.Control type="text" placeholder="Enter number of coins" />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose} type="submit">
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
-    
+      <Consumer>
+        {value => {
+            const {wallet_list} = value;
+            console. log ({wallet_list});
+            wallet_list.map(wallet => (
+              totalCoins = totalCoins + wallet.amount
+            ))
+            return (
+              <React.Fragment>
+                <h3>Money Status</h3>
+                <h4>Total Coins: {totalCoins}</h4>
+              </React.Fragment>
+            );
+          }
+        }
+      </Consumer>
+    </div>  
   )
 }
