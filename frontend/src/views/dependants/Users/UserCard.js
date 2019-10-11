@@ -8,19 +8,28 @@ import Connection from '../Connection'
 
 
 const UserCard = (props) =>{
-  const [show, setShow] = React.useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showUserModal, setShowUserModal] = React.useState(false);
+  const [showCoinsModal, setShowCoinsModal] = React.useState(false);
+  
+  //open modals
+  const CloseCoinsModal = () => setShowCoinsModal(false);
+  const CloseUserModal = () => setShowUserModal(false);
+  
+  //close modals
+  const OpenCoinsModal = () => setShowCoinsModal(true);
+  const OpenUserModal = () => setShowUserModal(true);
+  
   const [coins, setCoins] = useState("");
-
+  const [username, setUsername] = useState("");
 
   const {user} = props;
   const {amount} = props;
   const {walletid} = props;
   console.log(user)
 
-  const handleSubmit = (evt) => {
+  //Give Coins
+  const SubmitGiveCoins = (evt) => {
     evt.preventDefault();
     
     const data = {
@@ -36,44 +45,90 @@ const UserCard = (props) =>{
         console.log(err)
       }
     })
-}// end handle submit
+}
 
+//Update User
+const SubmitUpdateUser = (evt) => {
+  evt.preventDefault();
+  
+  const data = {
+    "$class": "org.example.mynetwork.User",
+    "id": Number(user.id),
+    "name": username,
+    "usertype": "NORMALUSER"
+  }
+  // Send this data to the Hyperledger Network
+  Connection.update('User', data, user.id)
+  .then((err) => {
+    if (err) {
+      console.log(err)
+    }
+  })
+}
  
   return(
     <div>
-    <div class="card">
-    <div class="card-body">
-    <h5 class="card-title">User ID: {user.id}</h5>
-    <h5 class="card-title">User Name: {user.name}</h5>
-    <h5 class="card-title">Amount: {amount}</h5>
-    <h5 class="card-title">walletid: {walletid}</h5>
-    <Button variant="primary" onClick={handleShow}>
-    Give Coins
-  </Button>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">User ID: {user.id}</h5>
+          <h5 class="card-title">User Name: {user.name}</h5>
+          <h5 class="card-title">Amount: {amount}</h5>
+          <h5 class="card-title">walletid: {walletid}</h5>
+
+          <Button variant="success" onClick={OpenCoinsModal}>
+            Give Coins
+          </Button>
+          <Button variant="primary" onClick={OpenUserModal}>
+            Update
+          </Button>
+          
     </div>
     </div>
-    <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal show={showCoinsModal} onHide={CloseCoinsModal} aria-labelledby="contained-modal-title-vcenter" centered>
         
     <Modal.Header closeButton>
       <Modal.Title>Give Coins</Modal.Title>
     </Modal.Header>
     
     <Modal.Body>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={SubmitGiveCoins}>
         <Form.Group controlId="username">
           <Form.Label>Enter Coins</Form.Label>
           <Form.Control type="text" value={coins} onChange={e => setCoins(e.target.value)}/>
         </Form.Group>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={CloseCoinsModal}>
           Close
         </Button>
-        <Button variant="success right" onClick={handleClose} type="submit">
+        <Button variant="success right" onClick={CloseCoinsModal} type="submit">
+          Submit
+        </Button>
+      </Form>
+    </Modal.Body>
+    </Modal>
+        <Modal show={showUserModal} onHide={CloseUserModal} aria-labelledby="contained-modal-title-vcenter" centered>
+        
+    <Modal.Header closeButton>
+      <Modal.Title>Update User</Modal.Title>
+    </Modal.Header>
+    
+    <Modal.Body>
+      <Form onSubmit={SubmitUpdateUser}>
+        <Form.Group controlId="username">
+          <Form.Label>Enter Name</Form.Label>
+          <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)}/>
+        </Form.Group>
+        <Button variant="secondary" onClick={CloseUserModal}>
+          Close
+        </Button>
+        <Button variant="success right" onClick={CloseUserModal} type="submit">
           Submit
         </Button>
       </Form>
     </Modal.Body>
   
   </Modal>
+  
+  
   </div>
   );
 };

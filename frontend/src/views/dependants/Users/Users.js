@@ -17,7 +17,7 @@ export const Users = () => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
 
-  const handleSubmit = (evt) => {
+  const AddUser = (evt) => {
     evt.preventDefault();
     
     const data = {
@@ -34,7 +34,7 @@ export const Users = () => {
          console.log(err)
        }
      })
-}// end handle submit
+}
   
   return (
   <div>
@@ -45,7 +45,7 @@ export const Users = () => {
         </Modal.Header>
         
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={AddUser}>
             <Form.Group controlId="userid">
               <Form.Label>User ID</Form.Label>
               <Form.Control type="text" value={id} onChange={e => setId(e.target.value)} />
