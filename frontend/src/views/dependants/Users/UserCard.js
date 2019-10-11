@@ -65,7 +65,20 @@ const SubmitUpdateUser = (evt) => {
     }
   })
 }
- 
+
+//Delete User
+const SubmitDeleteUser = (evt) => {
+  evt.preventDefault();
+  
+  // Send id to the Hyperledger Network
+  Connection.delele('User', user.id)
+  .then((err) => {
+    if (err) {
+      console.log(err)
+      
+    }
+  })
+}
   return(
     <div>
       <div class="card">
@@ -80,6 +93,9 @@ const SubmitUpdateUser = (evt) => {
           </Button>
           <Button variant="primary" onClick={OpenUserModal}>
             Update
+          </Button>
+          <Button variant="primary" onClick={SubmitDeleteUser}>
+            Delete
           </Button>
           
     </div>

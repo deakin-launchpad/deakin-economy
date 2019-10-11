@@ -45,9 +45,27 @@ function search(query, cb) {
   
   }
   
+  function delele(type, id){
+     
+    return new Promise((resolve, reject) => {
+      return fetch(`http://localhost:3000/api/${type}/${id}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'delete',
+        path: id
+      })
+      .then(() => resolve())
+    })
+  
+  }
+
+  
+  
   function parseJSON(response) {
     return response.json();
   }
   
-  const Connection = { search, create, update};
+  const Connection = { search, create, update, delele };
   export default Connection;
