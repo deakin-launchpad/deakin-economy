@@ -25,10 +25,29 @@ function search(query, cb) {
     })
   
   }
+
+  function update(type, data, id){
+     
+    return new Promise((resolve, reject) => {
+      return fetch(`http://localhost:3000/api/${type}/${id}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'put',
+        body: JSON.stringify(data),
+        path: id
+        
+      })
+      .then(parseJSON)
+      .then(() => resolve())
+    })
+  
+  }
   
   function parseJSON(response) {
     return response.json();
   }
   
-  const Connection = { search, create };
+  const Connection = { search, create, update};
   export default Connection;

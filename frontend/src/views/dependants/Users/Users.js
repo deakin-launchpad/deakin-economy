@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import UserCard from './UserCard'
 import {Consumer} from '../../../contexts/common/context'
-import Connection from './Connection'
+import Connection from '../Connection'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -75,14 +75,13 @@ export const Users = () => {
             if(user_list === undefined || user_list.length === 0){
               return null;
             }
-            if(wallet_list === undefined || wallet_list.length === 0){
-              return null;
-            }
+           
             else{
             return (
               <React.Fragment>
                 {user_list.map((user,k) => {
                      let amount=0;
+                     let walletid=0;
                    if(user.usertype == 'ADMIN'){
                     return null;
                     }
@@ -92,9 +91,10 @@ export const Users = () => {
                  
                       if(user.name == owner){
                         amount = wallet.amount;
+                        walletid=wallet.id;
                       }
                     })  
-                    return (<UserCard key={k} user={user} amount={amount}/>)
+                    return (<UserCard key={k} walletid={walletid} user={user} amount={amount}/>)
                 })}
              
               </React.Fragment>
