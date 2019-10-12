@@ -33,13 +33,13 @@ const UserCard = (props) =>{
     evt.preventDefault();
     
     const data = {
-      "$class": "org.example.mynetwork.Wallet",
-      "id": "w5",
-      "amount": coins,
-      "owner": user.name
+      "$class": "org.example.mynetwork.TransferCoin",
+      "sender": "w1",
+      "receiver": walletid,
+      "amount": Number(coins)
     }
     // Send this data to the Hyperledger Network
-    Connection.create('Wallet', data)
+    Connection.create('TransferCoin', data)
     .then((err) => {
       if (err) {
         console.log(err)
@@ -66,12 +66,21 @@ const SubmitUpdateUser = (evt) => {
   })
 }
 
-//Delete User
+//Delete User and Wallet
 const SubmitDeleteUser = (evt) => {
   evt.preventDefault();
   
-  // Send id to the Hyperledger Network
+  // Delete User
   Connection.delele('User', user.id)
+  .then((err) => {
+    if (err) {
+      console.log(err)
+      
+    }
+  })
+
+  // Delete User
+  Connection.delele('Wallet', 'w'+user.id)
   .then((err) => {
     if (err) {
       console.log(err)

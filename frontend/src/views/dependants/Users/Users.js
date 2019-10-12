@@ -17,10 +17,12 @@ export const Users = () => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
 
+  //add user and wallet
   const AddUser = (evt) => {
     evt.preventDefault();
     
-    const data = {
+    //create new user
+    const UserData = {
       "$class": "org.example.mynetwork.User",
       "id": id,
       "name": name,
@@ -28,7 +30,23 @@ export const Users = () => {
     }
 
      // Send this data to the Hyperledger Network
-     Connection.create('User', data)
+     Connection.create('User', UserData)
+     .then((err) => {
+       if (err) {
+         console.log(err)
+       }
+     })
+
+    //create user wallet
+     const WalletData = {
+      "$class": "org.example.mynetwork.Wallet",
+      "id": "w"+id,
+      "amount": 0,
+      "owner": name
+    }
+
+     // Send this data to the Hyperledger Network
+     Connection.create('Wallet', WalletData)
      .then((err) => {
        if (err) {
          console.log(err)
