@@ -5,7 +5,8 @@ export class Provider extends Component{
 
     state = {
         user_list: [],
-        wallet_list: []
+        wallet_list: [],
+        transaction_list: []
     }
 
     componentDidMount() {
@@ -21,6 +22,14 @@ export class Provider extends Component{
         .then(res => res.json())
         .then((data) => {
           this.setState({ wallet_list: data })
+          
+        })
+        .catch(console.log) 
+
+        fetch('http://localhost:3000/api/TransferCoin')
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ transaction_list: data })
           
         })
         .catch(console.log) 
