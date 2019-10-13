@@ -30,13 +30,14 @@ export const Money = () => {
         console.log(err)
       }
     })
-}// end handle submit
+  }
+
     var admincoins=0
     var usercoins= 0;
     var totalCoins=0;
-  return (
+  
+    return (
     <div>
-      
       <Consumer>
         {value => {
             const {wallet_list} = value;
@@ -51,7 +52,7 @@ export const Money = () => {
             totalCoins = admincoins + usercoins
             return (
               <React.Fragment>
-                     <h4 className="title">Coins Status</h4>
+                <h4 className="title">Coins Status</h4>
                 <div className="row">
                 <div className="col-lg-2 dash-grids">
                   <h6 className="grid-title">Admin Coins</h6>
@@ -73,32 +74,29 @@ export const Money = () => {
             );
           }
         }
-      </Consumer>
-      <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
-        
-        <Modal.Header closeButton>
-          <Modal.Title>Create Coins</Modal.Title>
-        </Modal.Header>
-        
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="username">
-              <Form.Label>Enter Coins</Form.Label>
-              <Form.Control type="text" value={coins} onChange={e => setCoins(e.target.value)}/>
-            </Form.Group>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="success right" onClick={handleClose} type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      
-      </Modal>
-      <Button variant="primary" onClick={handleShow}>
-        Create Coins
-      </Button>
+        </Consumer>
+          <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Create Coins</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="username">
+                  <Form.Label>Enter Coins</Form.Label>
+                  <Form.Control type="text" value={coins} onChange={e => setCoins(e.target.value)}/>
+                </Form.Group>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="success right" onClick={handleClose} type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </Modal.Body>
+          </Modal>
+          <Button variant="primary" onClick={handleShow}>
+            Create Coins
+          </Button>
     </div>  
   )
 }

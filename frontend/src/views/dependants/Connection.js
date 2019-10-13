@@ -58,11 +58,9 @@ function search(query, cb) {
       })
       .then(() => resolve())
     })
-  
+
   }
 
-  
-  
   function parseJSON(response) {
     return response.json();
   }

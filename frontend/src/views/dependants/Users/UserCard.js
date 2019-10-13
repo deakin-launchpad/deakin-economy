@@ -28,10 +28,16 @@ const UserCard = (props) =>{
   const {user} = props;
   const {amount} = props;
   const {walletid} = props;
-  //console.log(user)
+  const {admincoins} = props;
+  console.log('admin'+admincoins);
+
 
   //Give Coins
   const SubmitGiveCoins = (evt) => {
+    if(admincoins<coins){
+      alert("not enough coins!!");
+    }
+    else{
     evt.preventDefault();
     const data = {
       "$class": "org.example.mynetwork.TransferCoin",
@@ -46,47 +52,46 @@ const UserCard = (props) =>{
         console.log(err)
       }
     })
-  }
-
-//Update User
-const SubmitUpdateUser = (evt) => {
-  evt.preventDefault();
-  
-  const data = {
-    "$class": "org.example.mynetwork.User",
-    "id": Number(user.id),
-    "name": username,
-    "usertype": "NORMALUSER"
-  }
-
-  // Send this data to the Hyperledger Network
-  Connection.update('User', data, user.id)
-  .then((err) => {
-    if (err) {
-      console.log(err)
     }
-  })
   }
+  
+  //Update User
+  const SubmitUpdateUser = (evt) => {
+    evt.preventDefault();
+  
+    const data = {
+      "$class": "org.example.mynetwork.User",
+      "id": Number(user.id),
+      "name": username,
+      "usertype": "NORMALUSER"
+    }
 
-//Delete User and Wallet
-const SubmitDeleteUser = (evt) => {
-  evt.preventDefault();
+    // Send this data to the Hyperledger Network
+    Connection.update('User', data, user.id)
+      .then((err) => {
+      if (err) {
+        console.log(err)
+      }
+    })
+    }
+
+    //Delete User and Wallet
+  const SubmitDeleteUser = (evt) => {
+    evt.preventDefault();
   
   // Delete User
   Connection.delele('User', user.id)
   .then((err) => {
     if (err) {
-      console.log(err)
-      
+      console.log(err) 
     }
   })
 
-  // Delete User
+  // Delete User Wallet
   Connection.delele('Wallet', 'w'+user.id)
   .then((err) => {
     if (err) {
       console.log(err)
-      
     }
   })
   }
@@ -101,7 +106,6 @@ const SubmitDeleteUser = (evt) => {
           <Button className="col-lg-2" variant="default" onClick={OpenCoinsModal}>
           <i class="material-icons">monetization_on</i>
           </Button>
-     
           <Button className="col-lg-2" variant="default" onClick={OpenUserModal}>
           <i class="material-icons">edit</i>
           </Button>
@@ -109,20 +113,15 @@ const SubmitDeleteUser = (evt) => {
           <i class="material-icons">delete</i>
           </Button>
           </div>
-          
-  
     </div>
-    <Modal show={showDeleteModal} onHide={CloseDeleteModal} aria-labelledby="contained-modal-title-vcenter" centered>
-        
+    <Modal show={showDeleteModal} onHide={CloseDeleteModal} aria-labelledby="contained-modal-title-vcenter" centered> 
     <Modal.Header closeButton>
       <Modal.Title>Delete User</Modal.Title>
     </Modal.Header>
-    
     <Modal.Body>
     <Form onSubmit={SubmitDeleteUser}>
         <Form.Group controlId="username">
           <Form.Label>Do you want to delete user#{user.id}?</Form.Label>
-   
         </Form.Group>
         <Button variant="secondary" onClick={CloseDeleteModal}>
           No
@@ -133,12 +132,10 @@ const SubmitDeleteUser = (evt) => {
       </Form>
     </Modal.Body>
     </Modal>
-    <Modal show={showCoinsModal} onHide={CloseCoinsModal} aria-labelledby="contained-modal-title-vcenter" centered>
-        
+    <Modal show={showCoinsModal} onHide={CloseCoinsModal} aria-labelledby="contained-modal-title-vcenter" centered>    
     <Modal.Header closeButton>
       <Modal.Title>Give Coins</Modal.Title>
     </Modal.Header>
-    
     <Modal.Body>
       <Form onSubmit={SubmitGiveCoins}>
         <Form.Group controlId="username">
@@ -155,12 +152,10 @@ const SubmitDeleteUser = (evt) => {
     </Modal.Body>
     </Modal>
 
-    <Modal show={showUserModal} onHide={CloseUserModal} aria-labelledby="contained-modal-title-vcenter" centered>
-        
+    <Modal show={showUserModal} onHide={CloseUserModal} aria-labelledby="contained-modal-title-vcenter" centered> 
     <Modal.Header closeButton>
       <Modal.Title>Update User</Modal.Title>
     </Modal.Header>
-    
     <Modal.Body>
       <Form onSubmit={SubmitUpdateUser}>
         <Form.Group controlId="username">
@@ -175,12 +170,9 @@ const SubmitDeleteUser = (evt) => {
         </Button>
       </Form>
     </Modal.Body>
-  
   </Modal>
-  
-  
-  </div>
-  );
+</div>
+);
 };
 
 export default UserCard;

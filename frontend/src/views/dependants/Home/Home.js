@@ -24,16 +24,16 @@ export const Home = () => {
                 return null;
               }
               usercoins = usercoins + wallet.amount
-            })
+              })
 
-            user_list.map(user => {
+              user_list.map(user => {
               if(user.usertype == 'NORMALUSER'){
                 totalusers = totalusers + 1;
               }
-            })
+              })
 
             transaction_list.map(transaction => {
-                totalTransactions=totalTransactions+1;
+              totalTransactions=totalTransactions+1;
             })
             
             return (

@@ -96,17 +96,21 @@ export const Users = () => {
                 {user_list.map((user,k) => {
                      let amount=0;
                      let walletid=0;
+                     let admincoins=0;
                    if(user.usertype == 'ADMIN'){
                     return null;
                     }
                     wallet_list.map((wallet,key) => {
+                      if(wallet.id=='w1'){
+                        admincoins=wallet.amount;
+                      }
                       const owner=wallet.owner.slice(36);
                       if(user.name == owner){
                         amount = wallet.amount;
                         walletid=wallet.id;
                       }
                     })  
-                    return (<UserCard key={k} walletid={walletid} user={user} amount={amount}/>)
+                    return (<UserCard key={k} admincoins={admincoins} walletid={walletid} user={user} amount={amount}/>)
                 })}
              </div>
             );

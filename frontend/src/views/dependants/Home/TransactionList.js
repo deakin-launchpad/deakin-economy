@@ -11,7 +11,6 @@ const TransactionList = (props) =>{
   const time=transaction.timestamp.slice(11,19);
 
   return (
-
          <tr>
                 <td>{id}</td>
                 <td>{sender}</td>
@@ -20,7 +19,7 @@ const TransactionList = (props) =>{
                 <td>{date}</td>
                 <td>{time}</td>
           </tr>
-  )
-}
+        )
+  }
 
 export default TransactionList
