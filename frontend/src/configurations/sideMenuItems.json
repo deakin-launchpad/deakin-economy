@@ -20,13 +20,6 @@
       "icon": "people",
       "controller": "users",
       "customTitle": "Welcome Admin"
-    },
-    {
-      "name": "TRANSACTIONS",
-      "type": "button",
-      "icon": "compare_arrows",
-      "controller": "transactions",
-      "customTitle": "Welcome Admin"
     }
   ]
 }

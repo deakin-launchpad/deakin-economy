@@ -31,11 +31,9 @@ export const Money = () => {
       }
     })
 }// end handle submit
-
     var admincoins=0
     var usercoins= 0;
     var totalCoins=0;
-  
   return (
     <div>
       
@@ -53,10 +51,24 @@ export const Money = () => {
             totalCoins = admincoins + usercoins
             return (
               <React.Fragment>
-                <h3>Coins Status</h3>
-                <h4>Total Coins: {totalCoins}</h4>
-                <h4>Admin Coins: {admincoins}</h4>
-                <h4>User Coins: {usercoins}</h4>
+                     <h4 className="title">Coins Status</h4>
+                <div className="row">
+                <div className="col-lg-2 dash-grids">
+                  <h6 className="grid-title">Admin Coins</h6>
+                  <h5> {admincoins}</h5>
+                  <i class="material-icons">monetization_on</i> 
+                </div>
+                <div className="col-lg-2 dash-grids">
+                  <h6 className="grid-title">User Coins</h6>
+                  <h5> {usercoins}</h5>
+                  <i class="material-icons">attach_money</i> 
+                </div>
+                <div className="col-lg-2 dash-grids">
+                  <h6 className="grid-title">Total Coins</h6>
+                  <h5> {totalCoins}</h5>
+                  <i class="material-icons">add</i> 
+                </div>
+              </div>
               </React.Fragment>
             );
           }

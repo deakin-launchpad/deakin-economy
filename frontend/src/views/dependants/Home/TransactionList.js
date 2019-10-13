@@ -7,7 +7,8 @@ const TransactionList = (props) =>{
   const sender=transaction.sender.slice(38);
   const receiver=transaction.receiver.slice(38);
   const amount=transaction.amount;
-  const timestamp=transaction.timestamp;
+  const date=transaction.timestamp.slice(0,10);
+  const time=transaction.timestamp.slice(11,19);
 
   return (
 
@@ -16,7 +17,8 @@ const TransactionList = (props) =>{
                 <td>{sender}</td>
                 <td>{receiver}</td>
                 <td>{amount}</td>
-                <td>{timestamp}</td>
+                <td>{date}</td>
+                <td>{time}</td>
           </tr>
   )
 }

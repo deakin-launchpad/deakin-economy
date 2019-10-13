@@ -8,7 +8,6 @@ import { Login, Register, Home} from 'views'
 import { Layout } from '../layout';
 import { Users } from 'views/dependants/Users/Users';
 import { Money } from 'views/dependants/Money/Money';
-import { Transactions } from 'views/dependants/Transactions/Transactions';
 
 export const AppRoutes = () => {
   const { loginStatus } = useContext(LoginContext);
@@ -28,7 +27,6 @@ export const AppRoutes = () => {
         <Route exact path='/home' render={() => ((redirectToLogin ? <Redirect to={{ pathname: '/login' }} /> : <Home />))} />
         <Route exact path='/money' render={() => ((redirectToLogin ? <Redirect to={{ pathname: '/login' }} /> : <Money />))} />
         <Route exact path='/users' render={() => ((redirectToLogin ? <Redirect to={{ pathname: '/login' }} /> : <Users />))} />
-        <Route exact path='/transactions' render={() => ((redirectToLogin ? <Redirect to={{ pathname: '/login' }} /> : <Transactions />))} />
    </Layout>
     </Switch>
   )

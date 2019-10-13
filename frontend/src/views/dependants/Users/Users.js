@@ -52,16 +52,14 @@ export const Users = () => {
          console.log(err)
        }
      })
-}
+    }
   
   return (
   <div>
       <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
-        
         <Modal.Header closeButton>
           <Modal.Title>Add User</Modal.Title>
         </Modal.Header>
-        
         <Modal.Body>
           <Form onSubmit={AddUser}>
             <Form.Group controlId="userid">
@@ -80,12 +78,10 @@ export const Users = () => {
             </Button>
           </Form>
         </Modal.Body>
-      
       </Modal>
-    <div className="row">
-    <Consumer>
-        {value => {
-         
+      <div className="row">
+        <Consumer>
+          {value => {
             const {user_list} = value;
             const{wallet_list} = value;
             console.log(wallet_list)
@@ -93,10 +89,10 @@ export const Users = () => {
             if(user_list === undefined || user_list.length === 0){
               return null;
             }
-           
             else{
             return (
-              <React.Fragment>
+            <div className="container">
+              <h4 className="title">Users</h4>
                 {user_list.map((user,k) => {
                      let amount=0;
                      let walletid=0;
@@ -104,9 +100,7 @@ export const Users = () => {
                     return null;
                     }
                     wallet_list.map((wallet,key) => {
-                     
                       const owner=wallet.owner.slice(36);
-                 
                       if(user.name == owner){
                         amount = wallet.amount;
                         walletid=wallet.id;
@@ -114,12 +108,11 @@ export const Users = () => {
                     })  
                     return (<UserCard key={k} walletid={walletid} user={user} amount={amount}/>)
                 })}
-             
-              </React.Fragment>
+             </div>
             );
-          }}
-        }
-      </Consumer>
+            }}
+          }
+        </Consumer>
       </div>
       <Button variant="primary" onClick={handleShow}>
         Add User

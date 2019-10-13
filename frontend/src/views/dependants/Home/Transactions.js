@@ -3,18 +3,19 @@ import {Consumer} from '../../../contexts/common/context'
 import Table from 'react-bootstrap/Table'
 import TransactionList from './TransactionList'
 
+
 export const Transactions = () => {
 
   return (
-    <div>
-       <Table striped bordered size="sm" className="col-lg-10">
+       <Table striped responsive bordered size="sm" className="col-lg-10">
             <thead>
               <tr>
-              
                 <th>Transaction Id</th>
                 <th>Sender Wallet</th>
-                <th>Amount</th>
-                <th>Date and Time</th>
+                <th>Receiver Wallet</th>
+                <th>Coins</th>
+                <th>Date</th>
+                <th>Time</th>
               </tr>
             </thead>
             <tbody>
@@ -36,7 +37,6 @@ export const Transactions = () => {
     </Consumer>
          
             </tbody>
-          </Table>
-  </div>  
+          </Table> 
   ) // main return
 }
