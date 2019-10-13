@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "name": "HOME",
+      "type": "button",
+      "icon": "home",
+      "controller": "home",
+      "customTitle": "Welcome User"
+    },
+    {
+      "name": "USERS",
+      "type": "button",
+      "icon": "people",
+      "controller": "users",
+      "customTitle": "Welcome User"
+    }
+  ]
+}
