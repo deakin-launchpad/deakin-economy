@@ -11,7 +11,7 @@
     "idb": "^4.0.3",
     "jquery": "^3.4.1",
     "material-design-icons": "^3.0.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.8.6",
